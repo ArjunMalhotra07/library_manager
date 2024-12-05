@@ -6,10 +6,10 @@ import (
 )
 
 type AuthorRepository interface {
-	AddAuthor(author *model.Author) error
-	DeleteAuthor(id string) error
-	EditAuthor(id string, updatedAuthor *model.Author) (*model.Author, error)
 	GetAuthors() ([]model.Author, error)
+	AddAuthor(author *model.Author) error
+	EditAuthor(id string, updatedAuthor *model.Author) (*model.Author, error)
+	DeleteAuthor(id string) error
 }
 
 type GormAuthorRepo struct {
