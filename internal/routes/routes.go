@@ -1,9 +1,10 @@
 package handlers
 
 import (
-	"github.com/ArjunMalhotra07/handlers/authors"
-	"github.com/ArjunMalhotra07/handlers/books"
-	"github.com/ArjunMalhotra07/handlers/borrows"
+	handlers "github.com/ArjunMalhotra07/internal/handlers/authors"
+	"github.com/ArjunMalhotra07/internal/handlers/books"
+	"github.com/ArjunMalhotra07/internal/handlers/borrows"
+	repo "github.com/ArjunMalhotra07/internal/repo/authors"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -31,18 +32,12 @@ func OpenServer(gormDriver *gorm.DB) {
 	r.Run(":8080")
 }
 func AuthorAPIs(router *gin.RouterGroup, driver *gorm.DB) {
-	router.GET("/", func(ctx *gin.Context) {
-		authors.GetAuthors(ctx, driver)
-	})
-	router.POST("/", func(ctx *gin.Context) {
-		authors.AddAuthor(ctx, driver)
-	})
-	router.PUT("/:id", func(ctx *gin.Context) {
-		authors.EditAuthor(ctx, driver)
-	})
-	router.DELETE("/:id", func(ctx *gin.Context) {
-		authors.DeleteAuthor(ctx, driver)
-	})
+	authorRepo := repo.NewGormAuthorRepo(driver)
+	authorHandler := handlers.NewAuthorHandler(authorRepo)
+	router.GET("/", authorHandler.GetAuthors)
+	router.POST("/", authorHandler.AddAuthor)
+	router.PUT("/:id", authorHandler.EditAuthor)
+	router.DELETE("/:id", authorHandler.DeleteAuthor)
 }
 
 func BooksAPIs(router *gin.RouterGroup, driver *gorm.DB) {
