@@ -4,9 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/ArjunMalhotra07/handlers"
-	"github.com/ArjunMalhotra07/model"
-
+	"github.com/ArjunMalhotra07/internal/model"
+	"github.com/ArjunMalhotra07/internal/routes"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -23,5 +22,5 @@ func main() {
 		log.Fatalf("Failed to auto-migrate database: %v", err)
 		return
 	}
-	handlers.OpenServer(driver)
+	routes.OpenServer(driver)
 }

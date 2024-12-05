@@ -1,4 +1,4 @@
-package handlers
+package routes
 
 import (
 	handlers "github.com/ArjunMalhotra07/internal/handlers/authors"
