@@ -6,9 +6,9 @@ import (
 )
 
 type BookRepository interface {
-	GetBooks() ([]model.Book, error)
-	AddBook(book model.Book) error
-	EditBook(id string, updateBook model.Book) (*model.Book, error)
+	GetAllBooks() ([]model.Book, error)
+	AddBook(book *model.Book) error
+	EditBook(id string, updateBook *model.Book) (*model.Book, error)
 	DeleteBook(id string) error
 }
 

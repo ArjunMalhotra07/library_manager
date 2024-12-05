@@ -18,7 +18,7 @@ func (h *AuthorHandler) AddAuthor(c *gin.Context) {
 
 	authorID, err := exec.Command("uuidgen").Output()
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"msg": "Failure", "error": "Error generating user ID"})
+		c.JSON(http.StatusInternalServerError, gin.H{"msg": "Failure", "error": "Error generating author ID"})
 		return
 	}
 	author.ID = strings.TrimSpace(string(authorID))
